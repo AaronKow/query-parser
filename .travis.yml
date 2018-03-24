@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - "6.2.2"
+before_script:
+  - npm i
+cache:
+  directories:
+    - node_modules
+
+jobs:
+  include:
+    - stage: test
+      script: npm run test
+    - stage: Deployment to GitHub Pages
+      script:
+        - npm run build
+        - touch ./dist/CNAME
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        target_branch: gh-pages
+        local_dir: "./dist"
+        github_token: $GITHUB_TOKEN
+        on:
+          branch: master
