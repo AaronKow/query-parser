@@ -9,8 +9,6 @@ cache:
 
 jobs:
   include:
-    - stage: test
-      script: npm run test
     - stage: Deployment to GitHub Pages
       script:
         - npm run build
